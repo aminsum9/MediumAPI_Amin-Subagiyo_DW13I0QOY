@@ -1,15 +1,21 @@
 const Categories = require("../models").Categories;
+const Articles = require("../models").Article;
 
-//GET data
+//GET data Category
 exports.index = (req, res) => {
   Categories.findAll().then(Categories => res.send(Categories));
 };
 
-//GET data dengan id tertentu
+//GET data spesifik Category
 exports.show = (req, res) => {
   Categories.findOne({ where: { name: req.params.name } }).then(Categories =>
     res.send(Categories)
   );
+};
+
+//GET all Article
+exports.allarticle = (req, res) => {
+  Articles.findAll().then(Articles => res.send(Articles));
 };
 
 // //POST data lewat body

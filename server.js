@@ -15,11 +15,12 @@ app.use(bodyPanser.json());
 app.listen(port, () => console.log(`Listen to port ${port}`));
 
 app.group("/api/v1", router => {
-  //Create new API todos
+  //GET all Category
   router.get("/categories", Controller.index);
-  //GET detail route
+  //POST Category
   router.get("/category/:name", Controller.show);
-  //POST new account
+  //GET All Article
+  router.get("/articles", Controller.allarticle);
   // router.create("/account", AccountController.create);
   // //PATCH(update) an account
   // router.patch("/account/:id", AccountController.update);

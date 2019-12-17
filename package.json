@@ -1,0 +1,21 @@
+{
+  "name": "project-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-group-routes": "^1.1.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^2.0.2",
+    "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "amin subagiyo",
+  "license": "ISC"
+}

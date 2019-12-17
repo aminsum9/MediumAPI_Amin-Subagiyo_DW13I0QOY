@@ -7,10 +7,12 @@ exports.index = (req, res) => {
 };
 
 //GET data spesifik Category
-exports.show = (req, res) => {
-  Categories.findOne({ where: { name: req.params.name } }).then(Categories =>
-    res.send(Categories)
-  );
+exports.createcategory = (req, res) => {
+  Categories.create(req.body).then(Categories => {
+    res.send({
+      Message: "success"
+    });
+  });
 };
 
 //GET all Article

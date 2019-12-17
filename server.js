@@ -18,7 +18,7 @@ app.group("/api/v1", router => {
   //GET all Category
   router.get("/categories", Controller.index);
   //POST Category
-  router.get("/category/:name", Controller.show);
+  router.post("/category", Controller.createcategory);
   //GET All Article
   router.get("/articles", Controller.allarticle);
   // router.create("/account", AccountController.create);

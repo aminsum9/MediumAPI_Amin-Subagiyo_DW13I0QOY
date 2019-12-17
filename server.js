@@ -1,4 +1,4 @@
-const AccountController = require("./controller/medium.js");
+const Controller = require("./controller/medium.js");
 
 require("express-group-routes");
 
@@ -16,13 +16,13 @@ app.listen(port, () => console.log(`Listen to port ${port}`));
 
 app.group("/api/v1", router => {
   //Create new API todos
-  router.get("/accounts", AccountController.index);
+  router.get("/categories", Controller.index);
   //GET detail route
-  router.get("/account/:id", AccountController.show);
+  router.get("/category/:name", Controller.show);
   //POST new account
-  router.post("/account", AccountController.create);
-  //PATCH(update) an account
-  router.patch("/account/:id", AccountController.update);
-  //DELETE an account
-  router.delete("/account/:id", AccountController.delete);
+  // router.create("/account", AccountController.create);
+  // //PATCH(update) an account
+  // router.patch("/account/:id", AccountController.update);
+  // //DELETE an account
+  // router.delete("/account/:id", AccountController.delete);
 });

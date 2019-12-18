@@ -1,6 +1,7 @@
 const Categories = require("../models").Categories;
 const Articles = require("../models").Article;
 
+/* Task 1 */
 //GET data Category
 exports.index = (req, res) => {
   Categories.findAll().then(Categories => res.send(Categories));
@@ -15,35 +16,26 @@ exports.createcategory = (req, res) => {
   });
 };
 
+/* Task 2 */
 //GET all Article
 exports.allarticle = (req, res) => {
   Articles.findAll().then(Articles => res.send(Articles));
 };
 
-// //POST data lewat body
-// exports.create = (req, res) => {
-//   const data = req.body;
-//   accounts.push(data);
-//   res.send(data);
-// };
+// GET popular article
 
-// //POST update data lebih spesifik
-// exports.update = (req, res) => {
-//   const id = req.params.id;
-//   const index = id - 1;
-//   const data = req.body;
-//   console.log(id, index, data);
-//   accounts[index] = { ...accounts[index], ...data };
-//   res.send(accounts[index]);
-// };
+// List feature still with dummy data
 
-// //DELETE data
-// exports.delete = (req, res) => {
-//   const id = req.params.id;
-//   const index = id - 1;
-//   accounts.splice(index, 1);
-//   res.send(accounts);
-// };
+/* Task 4 */
+// CREATE all article
+exports.store = (req, res) => {
+  Articles.create(req.header, { where: {} }).then(Articles => {
+    res.send({
+      message: "success",
+      Articles
+    });
+  });
+};
 
 //sequelized
 // exports.indexdb = (req, res) => {

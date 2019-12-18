@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Follows", {
+    return queryInterface.createTable("follows", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,7 +17,7 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      following_user_id: {
+      follower_user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "users",
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Follows");
+    return queryInterface.dropTable("follows");
   }
 };

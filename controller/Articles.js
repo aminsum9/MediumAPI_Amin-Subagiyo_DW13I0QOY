@@ -1,5 +1,5 @@
 const Categories = require("../models").categories;
-const Articles = require("../models").article;
+const Articles = require("../models").articles;
 const Users = require("../models").users;
 
 /* Task 2 */
@@ -16,4 +16,14 @@ exports.allarticle = (req, res) => {
       }
     ]
   }).then(data => res.send(data));
+};
+
+//ADD article
+exports.addArticle = (req, res) => {
+  Articles.create(req.body).then(data =>
+    res.send({
+      message: "success add article",
+      data
+    })
+  );
 };

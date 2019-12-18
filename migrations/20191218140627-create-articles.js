@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Articles", {
+    return queryInterface.createTable("articles", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,10 +24,7 @@ module.exports = {
           key: "id"
         },
         onUpdate: "cascade",
-        onDelete: "cascade"
-      },
-      category_name: {
-        type: Sequelize.STRING
+        onDelete: "set null"
       },
       is_published: {
         type: Sequelize.TINYINT
@@ -35,17 +32,14 @@ module.exports = {
       is_archived: {
         type: Sequelize.TINYINT
       },
-      slug: {
-        type: Sequelize.STRING
-      },
       author_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "users",
           key: "id"
         },
-        onDelete: "cascade",
-        onUpdate: "cascade"
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +52,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Articles");
+    return queryInterface.dropTable("articles");
   }
 };

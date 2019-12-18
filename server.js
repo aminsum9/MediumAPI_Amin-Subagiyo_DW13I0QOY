@@ -1,5 +1,5 @@
-const Categories = require("./controller/Categories.js");
-const Articles = require("./controller/Articles.js");
+const Categories = require("./controller/Categories");
+const Articles = require("./controller/Articles");
 
 require("express-group-routes");
 
@@ -22,9 +22,6 @@ app.group("/api/v1", router => {
   router.post("/category", Categories.createcategory);
   //GET All Article
   router.get("/articles", Articles.allarticle);
-  // router.create("/account", AccountController.create);
-  // //PATCH(update) an account
-  // router.patch("/account/:id", AccountController.update);
-  // //DELETE an account
-  // router.delete("/account/:id", AccountController.delete);
+  //ADD article
+  router.post("/article", Articles.addArticle);
 });

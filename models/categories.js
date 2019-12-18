@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Categories = sequelize.define(
-    "Categories",
+  const categories = sequelize.define(
+    "categories",
     {
       name: DataTypes.STRING,
       is_published: DataTypes.TINYINT,
@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  Categories.associate = function(models) {
-    Categories.belongsTo(models.Article, {
-      foreignKey: "id",
-      sourceKey: "category_id"
+  categories.associate = function(models) {
+    categories.belongsToMany(models.users, {
+      through: models.articles,
+      as: "users",
+      foreignKey: "category_id"
     });
   };
-  return Categories;
+  return categories;
 };

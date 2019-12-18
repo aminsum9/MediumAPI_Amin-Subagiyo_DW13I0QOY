@@ -3,7 +3,7 @@ const Categories = require("../models").categories;
 /* Task 1 */
 //GET data Category
 exports.showcategory = (req, res) => {
-  Categories.findAll().then(Categories => res.send(Categories));
+  Categories.findAll().then(data => res.send(data));
 };
 
 //POST data spesifik Category

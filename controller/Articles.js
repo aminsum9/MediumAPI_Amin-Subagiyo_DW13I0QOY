@@ -5,16 +5,22 @@ const Users = require("../models").users;
 /* Task 2 */
 //GET all Article
 exports.allarticle = (req, res) => {
-  Categories.findAll({
-    include: [
-      {
-        model: Users,
-        as: "users",
-        through: {
-          model: Articles
-        }
-      }
-    ]
+  Articles.findAll({
+    attributes: {
+      include: "id",
+      exclude: ["category_id", "is_archived", "is_published", "author_id"]
+    }
+  }).then(data => res.send(data));
+};
+
+//GET spesifik Article
+exports.specificArticle = (req, res) => {
+  const { id } = req.params;
+
+  Articles.findOne({
+    where: {
+      id
+    }
   }).then(data => res.send(data));
 };
 

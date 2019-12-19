@@ -6,7 +6,7 @@ exports.showcategory = (req, res) => {
   Categories.findAll({}).then(data => res.send(data));
 };
 
-//POST data Category // kadang error
+//POST data Category
 exports.createcategory = (req, res) => {
   Categories.create(req.body).then(categories => {
     res.send({

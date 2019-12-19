@@ -1,6 +1,9 @@
 const Categories = require("./controller/Categories");
 const Articles = require("./controller/Articles");
 const Users = require("./controller/User");
+const Auth = require("./controller/Auth");
+
+const { authenticated } = require("./middleware");
 
 require("express-group-routes");
 
@@ -36,6 +39,8 @@ app.group("/api/v1", router => {
   /* Task 3 */
   //GET Article by Category
   router.get("/category/:category_id/articles", Articles.articleByCategory);
+
+  /* Task 4 */
 
   /* Task 10 */
   //Login authentication

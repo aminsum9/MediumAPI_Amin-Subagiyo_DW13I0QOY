@@ -31,16 +31,6 @@ exports.specificArticle = (req, res) => {
   }).then(data => res.send(data));
 };
 
-//ADD article
-exports.addArticle = (req, res) => {
-  Articles.create(req.body).then(data =>
-    res.send({
-      message: "success add article",
-      data
-    })
-  );
-};
-
 //GET pupular article(10 latest article)
 exports.getPopular = (req, res) => {
   Articles.findAll({
@@ -64,6 +54,7 @@ exports.getPopular = (req, res) => {
 };
 
 /* Task 3 */
+//GET Article by Id
 exports.articleByCategory = (req, res) => {
   const { category_id } = req.params;
 
@@ -91,4 +82,15 @@ exports.articleByCategory = (req, res) => {
       }
     }
   }).then(data => res.send(data));
+};
+
+/* Task 4 */
+//ADD article
+exports.addArticle = (req, res) => {
+  Articles.create(req.body).then(data =>
+    res.send({
+      message: "success add article",
+      data
+    })
+  );
 };

@@ -44,6 +44,7 @@ app.group("/api/v1", router => {
 
   /* Task 10 */
   //Login authentication
+  router.post("./login", Auth.login);
 
   /* Task 11 */
   //POST Register

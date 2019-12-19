@@ -44,12 +44,12 @@ exports.login = (req, res) => {
   });
 };
 
-exports.register = (req, res) => {
-  Users.create(req.body).then(user => {
-    const token = jwt.sign({ id: user.id }, "amin");
-    res.send({
-      email: user.email,
-      token
-    });
-  });
-};
+// exports.register = (req, res) => {
+//   Users.create(req.body).then(user => {
+//     const token = jwt.sign({ id: user.id }, "amin");
+//     res.send({
+//       email: user.email,
+//       token
+//     });
+//   });
+// };

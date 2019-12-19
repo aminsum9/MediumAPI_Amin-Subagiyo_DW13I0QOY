@@ -42,15 +42,6 @@ exports.getPopular = (req, res) => {
   }).then(data => res.send(data));
 };
 
-// DELETE article
-exports.deleteArticle = (req, res) => {
-  Articles.destroy({ where: { id: req.params.id } }).then(data =>
-    res.send({
-      message: "article successfully delete",
-      data
-    })
-  );
-};
 /* Task 3 */
 //GET Article by Category
 exports.articleByCategory = (req, res) => {
@@ -88,6 +79,24 @@ exports.addArticle = (req, res) => {
   Articles.create(req.body).then(data =>
     res.send({
       message: "success add article",
+      data
+    })
+  );
+};
+// DELETE article
+exports.deleteArticle = (req, res) => {
+  Articles.destroy({ where: { id: req.params.id } }).then(data =>
+    res.send({
+      message: "article successfully delete",
+      data
+    })
+  );
+};
+// UPDATE article
+exports.updateArticle = (req, res) => {
+  Articles.update(req.body, { where: { id: req.params.id } }).then(data =>
+    res.send({
+      Message: "article update successfully",
       data
     })
   );

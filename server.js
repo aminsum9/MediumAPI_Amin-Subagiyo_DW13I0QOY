@@ -31,16 +31,20 @@ app.group("/api/v1", router => {
   router.get("/articles", Articles.allarticle);
   //GET popular article
   router.get("/articles/latest", Articles.getPopular);
-  //DELETE article
-  router.delete("/article/:id", authenticated, Articles.deleteArticle);
 
   /* Task 3 */
   //GET Article by Category
-  router.patch("/category/:category_id/articles", Articles.articleByCategory);
+  router.get("/category/:category_id/articles", Articles.articleByCategory);
 
   /* Task 4 */
+
+  // middleware dan jwt masih gagal
   //ADD article
   router.post("/article", authenticated, Articles.addArticle);
+  //DELETE article
+  router.delete("/article/:id", authenticated, Articles.deleteArticle);
+  //UPDATE article
+  router.patch("/article/:id", authenticated, Articles.updateArticle);
 
   /* Task 5 */
   //GET Detail Article

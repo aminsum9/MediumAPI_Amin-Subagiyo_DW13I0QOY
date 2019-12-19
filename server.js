@@ -22,6 +22,7 @@ app.group("/api/v1", router => {
   router.get("/categories", Categories.showcategory);
   //POST Category
   router.post("/category", Categories.createcategory);
+
   /* Task 2 */
   //GET All Article
   router.get("/articles", Articles.allarticle);
@@ -29,6 +30,9 @@ app.group("/api/v1", router => {
   router.get("/article/:id", Articles.specificArticle);
   //ADD article // masih gagal
   router.post("/article", Articles.addArticle);
+  /* Task 10 */
+  //Login authentication
+
   /* Task 11 */
   //POST Register
   router.post("/register", Users.register);

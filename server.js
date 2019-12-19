@@ -1,5 +1,6 @@
 const Categories = require("./controller/Categories");
 const Articles = require("./controller/Articles");
+const Users = require("./controller/User");
 
 require("express-group-routes");
 
@@ -26,6 +27,9 @@ app.group("/api/v1", router => {
   router.get("/articles", Articles.allarticle);
   // GET spesifik Article
   router.get("/article/:id", Articles.specificArticle);
-  //ADD article
+  //ADD article // masih gagal
   router.post("/article", Articles.addArticle);
+  /* Task 11 */
+  //POST Register
+  router.post("/register", Users.register);
 });

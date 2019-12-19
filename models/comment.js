@@ -14,12 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   comment.associate = function(models) {
     comment.belongsTo(models.articles, {
       foreignKey: "article_id",
-      as: "article",
       sourceKey: "title"
     });
     comment.belongsTo(models.users, {
       foreignKey: "user_id",
-      as: "user",
       sourceKey: "fullname"
     });
   };

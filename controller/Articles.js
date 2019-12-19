@@ -5,6 +5,7 @@ const Users = require("../models").users;
 /* Task 2 */
 //GET all Article
 exports.allarticle = (req, res) => {
+  console.log("Processing func -> Add Category");
   Articles.findAll({
     attributes: {
       include: "id",
@@ -33,3 +34,5 @@ exports.addArticle = (req, res) => {
     })
   );
 };
+
+//GET pupular article(10 latest article)

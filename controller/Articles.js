@@ -5,7 +5,6 @@ const Users = require("../models").users;
 /* Task 2 */
 //GET all Article
 exports.allarticle = (req, res) => {
-  console.log("Processing func -> Add Category");
   Articles.findAll({
     attributes: {
       include: "id",
@@ -20,18 +19,8 @@ exports.allarticle = (req, res) => {
   }).then(data => res.send(data));
 };
 
-//GET spesifik Article
-exports.specificArticle = (req, res) => {
-  const { id } = req.params;
-
-  Articles.findOne({
-    where: {
-      id
-    }
-  }).then(data => res.send(data));
-};
-
 //GET pupular article(10 latest article)
+console.log("Processing func -> 10 latest article");
 exports.getPopular = (req, res) => {
   Articles.findAll({
     attributes: {
@@ -53,8 +42,17 @@ exports.getPopular = (req, res) => {
   }).then(data => res.send(data));
 };
 
+// DELETE article
+exports.deleteArticle = (req, res) => {
+  Articles.destroy({ where: { id: req.params.id } }).then(data =>
+    res.send({
+      message: "article successfully delete",
+      data
+    })
+  );
+};
 /* Task 3 */
-//GET Article by Id
+//GET Article by Category
 exports.articleByCategory = (req, res) => {
   const { category_id } = req.params;
 
@@ -85,7 +83,7 @@ exports.articleByCategory = (req, res) => {
 };
 
 /* Task 4 */
-//ADD article
+//ADD article // belum selesai
 exports.addArticle = (req, res) => {
   Articles.create(req.body).then(data =>
     res.send({
@@ -94,3 +92,36 @@ exports.addArticle = (req, res) => {
     })
   );
 };
+
+/* Task 5 */
+//GET detail Article // belum ada follownya
+exports.getDetailArticle = (req, res) => {
+  const { id } = req.params;
+  Articles.findOne({
+    where: {
+      id
+    },
+    attributes: {
+      include: "id",
+      exclude: ["category_id", "is_published", "is_archived", "author_id"]
+    },
+    include: {
+      model: Categories,
+      attributes: {
+        exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
+      }
+    }
+  }).then(data => res.send(data));
+};
+
+/* Task 9 */
+
+//belum selesai
+// exports.articleByPerson = (req, res) => {
+//   const { user_id } = req.params;
+//   Articles.findOne({
+//     where: {
+//       user_id
+//     }
+//   });
+// };

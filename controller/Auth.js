@@ -26,7 +26,7 @@ exports.login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({
+  Users.findOne({
     where: { email, password }
   }).then(user => {
     if (user) {

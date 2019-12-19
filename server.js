@@ -29,22 +29,29 @@ app.group("/api/v1", router => {
   /* Task 2 */
   //GET All Article
   router.get("/articles", Articles.allarticle);
-  // GET spesifik Article
-  router.get("/article/:id", Articles.specificArticle);
-  //ADD article
-  router.post("/article", Articles.addArticle);
   //GET popular article
   router.get("/articles/latest", Articles.getPopular);
+  //DELETE article
+  router.delete("/article/:id", authenticated, Articles.deleteArticle);
 
   /* Task 3 */
   //GET Article by Category
-  router.get("/category/:category_id/articles", Articles.articleByCategory);
+  router.patch("/category/:category_id/articles", Articles.articleByCategory);
 
   /* Task 4 */
+  //ADD article
+  router.post("/article", authenticated, Articles.addArticle);
+
+  /* Task 5 */
+  //GET Detail Article
+  router.get("/article/:id", Articles.getDetailArticle);
+
+  /* Task 9 */
+  // router.get("/article/user/:user_id/articles", Articles.articleByPerson);
 
   /* Task 10 */
   //Login authentication
-  router.post("./login", Auth.login);
+  router.post("/login", Auth.login);
 
   /* Task 11 */
   //POST Register

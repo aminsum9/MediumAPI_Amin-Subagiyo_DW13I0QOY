@@ -62,3 +62,33 @@ exports.getPopular = (req, res) => {
     limit: 10
   }).then(data => res.send(data));
 };
+
+/* Task 3 */
+exports.articleByCategory = (req, res) => {
+  const { category_id } = req.params;
+
+  Articles.findAll({
+    where: {
+      category_id
+    },
+    attributes: {
+      include: "id",
+      exclude: [
+        "content",
+        "image",
+        "category_id",
+        "is_published",
+        "is_archived",
+        "author_id",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    include: {
+      model: Categories,
+      attributes: {
+        exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
+      }
+    }
+  }).then(data => res.send(data));
+};

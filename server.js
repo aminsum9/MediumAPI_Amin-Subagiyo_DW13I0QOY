@@ -32,6 +32,11 @@ app.group("/api/v1", router => {
   router.post("/article", Articles.addArticle);
   //GET popular article
   router.get("/articles/latest", Articles.getPopular);
+
+  /* Task 3 */
+  //GET Article by Category
+  router.get("/category/:category_id/articles", Articles.articleByCategory);
+
   /* Task 10 */
   //Login authentication
 

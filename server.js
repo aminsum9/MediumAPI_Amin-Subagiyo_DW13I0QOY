@@ -28,8 +28,10 @@ app.group("/api/v1", router => {
   router.get("/articles", Articles.allarticle);
   // GET spesifik Article
   router.get("/article/:id", Articles.specificArticle);
-  //ADD article // masih gagal
+  //ADD article
   router.post("/article", Articles.addArticle);
+  //GET popular article
+  router.get("/articles/latest", Articles.getPopular);
   /* Task 10 */
   //Login authentication
 

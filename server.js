@@ -1,6 +1,7 @@
 const Categories = require("./controller/Categories");
 const Articles = require("./controller/Articles");
 const Users = require("./controller/User");
+const Comment = require("./controller/Comment");
 const Auth = require("./controller/Auth");
 
 const { authenticated } = require("./middleware");
@@ -13,7 +14,7 @@ const bodyPanser = require("body-parser");
 
 const app = express();
 
-const port = 3000;
+const port = 3001;
 
 app.use(bodyPanser.json());
 
@@ -38,7 +39,7 @@ app.group("/api/v1", router => {
 
   /* Task 4 */
 
-  // middleware and jwt still error
+  // not yet using token
   //ADD article
   router.post("/article", authenticated, Articles.addArticle);
   //DELETE article
@@ -49,6 +50,10 @@ app.group("/api/v1", router => {
   /* Task 5 */
   //GET Detail Article
   router.get("/article/:id", Articles.getDetailArticle);
+
+  /* Task 6 */
+  //POST data comment -- belum selesai
+  router.post("/article/:article_id/comment", Comment.AddComment);
 
   /* Task 9 */
   // router.get("/article/user/:user_id/articles", Articles.articleByPerson);

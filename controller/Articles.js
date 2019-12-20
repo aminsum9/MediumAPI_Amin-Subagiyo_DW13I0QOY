@@ -20,7 +20,6 @@ exports.allarticle = (req, res) => {
 };
 
 //GET pupular article(10 latest article)
-console.log("Processing func -> 10 latest article");
 exports.getPopular = (req, res) => {
   Articles.findAll({
     attributes: {

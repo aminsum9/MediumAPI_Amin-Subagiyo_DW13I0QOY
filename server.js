@@ -38,12 +38,12 @@ app.group("/api/v1", router => {
 
   /* Task 4 */
 
-  // middleware dan jwt masih gagal
+  // middleware and jwt still error
   //ADD article
   router.post("/article", authenticated, Articles.addArticle);
   //DELETE article
   router.delete("/article/:id", authenticated, Articles.deleteArticle);
-  //UPDATE article
+  //UPDATE article -- update pakai patch atau put
   router.patch("/article/:id", authenticated, Articles.updateArticle);
 
   /* Task 5 */

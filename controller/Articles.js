@@ -124,12 +124,22 @@ exports.getDetailArticle = (req, res) => {
 
 /* Task 9 */
 
-//belum selesai
-// exports.articleByPerson = (req, res) => {
-//   const { user_id } = req.params;
-//   Articles.findOne({
-//     where: {
-//       user_id
-//     }
-//   });
-// };
+exports.articleByPerson = (req, res) => {
+  const author_id = req.params.author_id;
+  Articles.findAll({
+    where: {
+      author_id
+    },
+    attributes: {
+      include: "id",
+      exclude: ["category_id", "is_published", "is_archived", "author_id"]
+    },
+    include: {
+      model: Categories,
+      attributes: {
+        exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
+      }
+    }
+  }).then(data => res.send(data));
+  // Articles.findAll().then(data => res.send(data));
+};

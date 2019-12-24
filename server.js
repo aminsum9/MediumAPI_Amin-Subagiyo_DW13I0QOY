@@ -60,7 +60,8 @@ app.group("/api/v1", router => {
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 
   /* Task 9 */
-  // router.get("/article/user/:user_id/articles", Articles.articleByPerson);
+  //GET Article by Category
+  router.get("/user/:author_id/articles", Articles.articleByPerson);
 
   /* Task 10 */
   //Login authentication

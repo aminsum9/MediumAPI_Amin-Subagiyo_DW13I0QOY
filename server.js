@@ -50,8 +50,8 @@ app.group("/api/v1", router => {
   router.get("/article/:id", Articles.getDetailArticle);
 
   /* Task 6 */
-  //ADD data comment -- belum selesai
-  router.post("/article/comment", Comment.AddComment);
+  //ADD data comment -- response tidak sesuai lms
+  router.post("/article/:article_id/comment", Comment.AddComment);
   //UPDATE data comment
   router.patch("/article/:id/comment", Comment.updateComment);
   //Show All Comments -- belum selesai

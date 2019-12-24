@@ -11,20 +11,22 @@ function getIdFromObject(data) {
 /* Task 6 */
 //ADD comment
 exports.AddComment = (req, res) => {
-  Comment.findAll({}).then(data => res.send(data));
+  const article_id = req.params.article_id;
+  const comment = req.body.comment;
+  Comments.create({
+    comment,
+    article_id
+  }).then(data => res.send(data));
+  // let commentId = getIdFromObject(data);
+  // Comment.findOne({
+  //   attributes: ["id", "comment"],
+  //   include: [{ model: Articles }],
+  //   where: { id: commentId }
+  // }).then(response => {
+  //   res.send(response);
+  // });
+  // );
 };
-// exports.AddComment = (req, res) => {
-//   Comments.create(req.body).then(data => res.send(
-//     let commentId = getIdFromObject(data);
-//     Comment.findOne({
-//       attributes: ["id", "comment"],
-//       include: [{ model: Articles }],
-//       where: { id: commentId }
-//     }).then(response => {
-//       res.send(response);
-//     });
-//   });
-// };
 
 //UPDATE Comment
 exports.updateComment = (req, res) => {

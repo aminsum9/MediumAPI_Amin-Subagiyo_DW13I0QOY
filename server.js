@@ -23,9 +23,11 @@ app.listen(port, () => console.log(`Listen to port ${port}`));
 app.group("/api/v1", router => {
   /* Task 1 */
   //GET all Category
-  router.get("/categories", Categories.showcategory);
+  router.get("/categories", Categories.showCategory);
   //POST Category
-  router.post("/category", Categories.createcategory);
+  router.post("/category", Categories.createCategory);
+  //DELETE Category
+  router.delete("/category/:id", Categories.deleteCategory);
 
   /* Task 2 */
   //GET All Article
@@ -58,6 +60,10 @@ app.group("/api/v1", router => {
   router.get("/articles/comment", Comment.showComments);
   //DELETE data comment
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
+
+  /* Task 8 */
+  //RELATED Article -- belum menyeleksi yang sudah muncul
+  router.get("/articles/:category_id/category", Articles.relatedArticle);
 
   /* Task 9 */
   //GET Article by Category

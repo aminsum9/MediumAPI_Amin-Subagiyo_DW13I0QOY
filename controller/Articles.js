@@ -121,9 +121,20 @@ exports.getDetailArticle = (req, res) => {
     }
   }).then(data => res.send(data));
 };
+/* Task 8 */
+//GET Related Article
+exports.relatedArticle = (req, res) => {
+  Articles.findAll({
+    where: { category_id: req.params.category_id },
+    include: {
+      model: Categories
+    },
+    limit: 3
+  }).then(data => res.send(data));
+};
 
 /* Task 9 */
-
+//GET Artilce by person
 exports.articleByPerson = (req, res) => {
   const author_id = req.params.author_id;
   Articles.findAll({
@@ -141,5 +152,4 @@ exports.articleByPerson = (req, res) => {
       }
     }
   }).then(data => res.send(data));
-  // Articles.findAll().then(data => res.send(data));
 };

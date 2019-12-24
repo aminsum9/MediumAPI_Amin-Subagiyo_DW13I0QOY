@@ -1,15 +1,22 @@
-const jwt = require("express-jwt");
-
-const isLogginIn = true;
+const jwt = require("jsonwebtoken");
 
 exports.authenticated = (req, res, next) => {
-  if (isLogginIn) {
-    next();
-  } else {
-    res.send({
-      Message: "You are unauthenticated"
-    });
+  let authHeader = req.headers["authorization"];
+
+  if (!authHeader) {
+    console.log("need header");
   }
+  let token = authHeader.split("Bearer ")[1];
+  console.log(authHeader);
+
+  jwt.verify(token, "amin", (err, decoded) => {
+    if (err) {
+      return res.status(403).send({ message: "Your Token is Longer Valid" });
+    }
+
+    req.userid = decoded.id;
+    next();
+  });
 };
 
 // exports.auth = jwt({

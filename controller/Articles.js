@@ -93,11 +93,11 @@ exports.deleteArticle = (req, res) => {
 };
 // UPDATE article
 exports.updateArticle = (req, res) => {
-  Articles.update(req.body, { where: { id: req.params.id } }).then(data =>
-    res.send({
-      Message: "article update successfully",
-      data
-    })
+  Articles.update(req.body, { where: { id: req.params.article_id } }).then(
+    data =>
+      res.send({
+        Message: "article update successfully"
+      })
   );
 };
 

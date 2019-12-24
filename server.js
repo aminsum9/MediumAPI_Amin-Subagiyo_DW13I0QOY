@@ -14,7 +14,7 @@ const bodyPanser = require("body-parser");
 
 const app = express();
 
-const port = 3001;
+const port = 5000;
 
 app.use(bodyPanser.json());
 
@@ -38,22 +38,26 @@ app.group("/api/v1", router => {
   router.get("/category/:category_id/articles", Articles.articleByCategory);
 
   /* Task 4 */
-
-  // not yet using token
   //ADD article
   router.post("/article", authenticated, Articles.addArticle);
   //DELETE article
   router.delete("/article/:id", authenticated, Articles.deleteArticle);
   //UPDATE article -- update pakai patch atau put
-  router.patch("/article/:id", authenticated, Articles.updateArticle);
+  router.patch("/article/:article_id", [authenticated], Articles.updateArticle);
 
   /* Task 5 */
   //GET Detail Article
   router.get("/article/:id", Articles.getDetailArticle);
 
   /* Task 6 */
-  //POST data comment -- belum selesai
-  router.post("/article/:article_id/comment", Comment.AddComment);
+  //ADD data comment -- belum selesai
+  router.post("/article/comment", Comment.AddComment);
+  //UPDATE data comment
+  router.patch("/article/:id/comment", Comment.updateComment);
+  //Show All Comments -- belum selesai
+  router.get("/articles/comment", Comment.showComments);
+  //DELETE data comment
+  router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 
   /* Task 9 */
   // router.get("/article/user/:user_id/articles", Articles.articleByPerson);

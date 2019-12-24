@@ -67,7 +67,7 @@ app.group("/api/v1", router => {
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 
   /* Task 7 */
-  //following other user -- nilai kembali sorry terus
+  //following other user
   router.post("/follow", authenticated, Follows.follow);
   //GET All Follow
   router.get("/follows", authenticated, Follows.getAllFollow);

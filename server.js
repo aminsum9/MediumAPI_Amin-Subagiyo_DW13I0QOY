@@ -61,8 +61,8 @@ app.group("/api/v1", router => {
   );
   //UPDATE data comment
   router.patch("/article/:id/comment", authenticated, Comment.updateComment);
-  //Show All Comments -- belum selesai
-  router.get("/articles/comment", Comment.showComments);
+  //Show Comment by Article id
+  router.get("/article/:article_id/comment", Comment.showComments);
   //DELETE data comment
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 

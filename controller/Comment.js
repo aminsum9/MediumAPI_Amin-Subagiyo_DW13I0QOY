@@ -43,15 +43,19 @@ exports.updateComment = (req, res) => {
   );
 };
 
-//GET All Comment
+//GET Comment by Article id
 exports.showComments = (req, res) => {
+  const articleId = req.params.article_id;
   Comments.findAll({
-    attributes: ["id", "comment"],
+    attributes: ["id", "comment", "createdAt", "updatedAt"],
     include: [
       {
-        model: Articles
+        model: Articles,
+        as: "article",
+        attributes: ["id", "title"]
       }
-    ]
+    ],
+    where: { article_id: articleId }
   }).then(data => res.send(data));
 };
 

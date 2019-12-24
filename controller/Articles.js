@@ -119,7 +119,11 @@ exports.getDetailArticle = (req, res) => {
         exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
       }
     }
-  }).then(data => res.send(data));
+  }).then(data =>
+    res.send({
+      message: "tes"
+    })
+  );
 };
 /* Task 8 */
 //GET Related Article

@@ -14,7 +14,7 @@ exports.authenticated = (req, res, next) => {
       return res.status(403).send({ message: "Your Token is Longer Valid" });
     }
 
-    req.userid = decoded.id;
+    userId = decoded.id;
     next();
   });
 };

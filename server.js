@@ -2,6 +2,7 @@ const Categories = require("./controller/Categories");
 const Articles = require("./controller/Articles");
 const Users = require("./controller/User");
 const Comment = require("./controller/Comment");
+const Follows = require("./controller/follow");
 const Auth = require("./controller/Auth");
 
 const { authenticated } = require("./middleware");
@@ -45,7 +46,7 @@ app.group("/api/v1", router => {
   //DELETE article
   router.delete("/article/:id", authenticated, Articles.deleteArticle);
   //UPDATE article -- update pakai patch atau put
-  router.patch("/article/:article_id", [authenticated], Articles.updateArticle);
+  router.patch("/article/:article_id", authenticated, Articles.updateArticle);
 
   /* Task 5 */
   //GET Detail Article
@@ -53,13 +54,23 @@ app.group("/api/v1", router => {
 
   /* Task 6 */
   //ADD data comment -- response tidak sesuai lms
-  router.post("/article/:article_id/comment", Comment.AddComment);
+  router.post(
+    "/article/:article_id/comment",
+    authenticated,
+    Comment.AddComment
+  );
   //UPDATE data comment
-  router.patch("/article/:id/comment", Comment.updateComment);
+  router.patch("/article/:id/comment", authenticated, Comment.updateComment);
   //Show All Comments -- belum selesai
   router.get("/articles/comment", Comment.showComments);
   //DELETE data comment
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
+
+  /* Task 7 */
+  //following other user -- nilai kembali sorry terus
+  router.post("/follow", authenticated, Follows.follow);
+  //GET All Follow
+  router.get("/follows", authenticated, Follows.getAllFollow);
 
   /* Task 8 */
   //RELATED Article -- belum menyeleksi yang sudah muncul
@@ -76,4 +87,6 @@ app.group("/api/v1", router => {
   /* Task 11 */
   //POST Register
   router.post("/register", Users.register);
+  //GET All Users
+  router.get("/users", Users.getAllUsers);
 });

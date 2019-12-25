@@ -1,5 +1,6 @@
 const Categories = require("../models").categories;
 const Articles = require("../models").articles;
+const Comments = require("../models").comment;
 const Users = require("../models").users;
 
 /* Task 2 */
@@ -37,7 +38,7 @@ exports.getPopular = (req, res) => {
       is_archived: 0
     },
     order: [["createdAt", "DESC"]],
-    limit: 10
+    limit: 4
   }).then(data => res.send(data));
 };
 
@@ -119,11 +120,7 @@ exports.getDetailArticle = (req, res) => {
         exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
       }
     }
-  }).then(data =>
-    res.send({
-      message: "tes"
-    })
-  );
+  }).then(data => res.send(data));
 };
 /* Task 8 */
 //GET Related Article

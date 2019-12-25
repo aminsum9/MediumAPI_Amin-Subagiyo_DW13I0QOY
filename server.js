@@ -4,6 +4,7 @@ const Users = require("./controller/User");
 const Comment = require("./controller/Comment");
 const Follows = require("./controller/follow");
 const Auth = require("./controller/Auth");
+const cors = require("cors");
 
 const { authenticated } = require("./middleware");
 
@@ -16,6 +17,8 @@ const bodyPanser = require("body-parser");
 const app = express();
 
 const port = 5000;
+
+app.use(cors());
 
 app.use(bodyPanser.json());
 
@@ -61,8 +64,8 @@ app.group("/api/v1", router => {
   );
   //UPDATE data comment
   router.patch("/article/:id/comment", authenticated, Comment.updateComment);
-  //Show Comment by Article id
-  router.get("/article/:article_id/comment", Comment.showComments);
+  //Show Comment by Article_id --error show id not suit with query
+  router.get("/article/:article_id/comments", Comment.showComments);
   //DELETE data comment
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 
@@ -77,7 +80,7 @@ app.group("/api/v1", router => {
   router.get("/articles/:category_id/category", Articles.relatedArticle);
 
   /* Task 9 */
-  //GET Article by Category
+  //GET Article by User_id
   router.get("/user/:author_id/articles", Articles.articleByPerson);
 
   /* Task 10 */

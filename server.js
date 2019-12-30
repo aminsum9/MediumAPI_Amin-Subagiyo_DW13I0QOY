@@ -65,7 +65,11 @@ app.group("/api/v1", router => {
   //UPDATE data comment
   router.patch("/article/:id/comment", authenticated, Comment.updateComment);
   //Show Comment by Article_id --error show id not suit with query
-  router.get("/article/:article_id/comments", Comment.showComments);
+  router.get(
+    "/article/:article_id/comments",
+    authenticated,
+    Comment.showComments
+  );
   //DELETE data comment
   router.delete("/article/:id/comment", authenticated, Comment.deleteComment);
 

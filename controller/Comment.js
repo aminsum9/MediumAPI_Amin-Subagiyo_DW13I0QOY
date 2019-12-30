@@ -47,15 +47,14 @@ exports.updateComment = (req, res) => {
 exports.showComments = (req, res) => {
   const articleId = req.params.article_id;
   Comments.findAll({
-    attributes: ["id", "comment", "createdAt", "updatedAt"],
-    include: [
-      {
-        model: Articles,
-        as: "article",
-        attributes: ["id", "title"]
-      }
-    ],
-    where: { article_id: articleId }
+    where: { article_id: articleId },
+    attributes: ["id", "comment", "createdAt", "updatedAt"]
+    //if using include, id comment not sincron with phpmyadmin
+    // include: {
+    //   model: Articles,
+    //   as: "article",
+    //   attributes: ["id", "title"]
+    // }
   }).then(data => res.send(data));
 };
 

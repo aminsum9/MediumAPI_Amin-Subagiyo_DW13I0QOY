@@ -16,7 +16,8 @@ exports.allarticle = (req, res) => {
       attributes: {
         exclude: ["is_published", "is_archived", "createdAt", "updatedAt"]
       }
-    }
+    },
+    order: [["createdAt", "DESC"]]
   }).then(data => res.send(data));
 };
 
@@ -76,7 +77,15 @@ exports.articleByCategory = (req, res) => {
 /* Task 4 */
 //ADD article // belum selesai
 exports.addArticle = (req, res) => {
-  Articles.create(req.body).then(data =>
+  Articles.create({
+    title: req.body.title,
+    content: req.body.content,
+    category_id: req.body.category_id,
+    image: req.body.image,
+    author_id: userId,
+    is_published: 1,
+    is_archived: 0
+  }).then(data =>
     res.send({
       message: "success add article",
       data

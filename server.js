@@ -9,7 +9,22 @@ const bodyPanser = require("body-parser");
 
 const app = express();
 
-const port = 3000;
+const port = 5000;
+
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+
+app.use(cors(corsOpts));
 
 app.use(bodyPanser.json());
 

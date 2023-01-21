@@ -2,16 +2,26 @@ const Categories = require("../models").categories;
 
 /* Task 1 */
 //GET data Category
-exports.showcategory = (req, res) => {
-  Categories.findAll().then(Categories => res.send(Categories));
+exports.showCategory = (req, res) => {
+  Categories.findAll({}).then(data => res.send(data));
 };
 
-//POST data spesifik Category
-exports.createcategory = (req, res) => {
-  Categories.create(req.body).then(Categories => {
+//POST data Category
+exports.createCategory = (req, res) => {
+  Categories.create(req.body).then(categories => {
     res.send({
       Message: "success",
-      Categories
+      categories
     });
   });
+};
+
+//DELETE Category
+exports.deleteCategory = (req, res) => {
+  Categories.destroy({ where: { id: req.params.id } }).then(data =>
+    res.send({
+      message: `Category id = ${req.params.id} deleted`,
+      data
+    })
+  );
 };

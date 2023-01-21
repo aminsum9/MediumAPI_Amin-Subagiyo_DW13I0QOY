@@ -19,7 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       sourceKey: "id"
     });
     articles.belongsTo(models.users, {
-      forreignKey: "author_id",
+      foreignKey: "author_id",
+      sourceKey: "id"
+    });
+    articles.hasMany(models.comment, {
+      foreignKey: "article_id",
       sourceKey: "id"
     });
   };

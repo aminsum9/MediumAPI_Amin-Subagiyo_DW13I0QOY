@@ -2,6 +2,7 @@ const Categories = require("../models").categories;
 const Articles = require("../models").articles;
 const Comments = require("../models").comment;
 const Users = require("../models").users;
+const fs = require('fs');
 
 /* Task 2 */
 //GET all Article
@@ -77,20 +78,55 @@ exports.articleByCategory = (req, res) => {
 /* Task 4 */
 //ADD article // belum selesai
 exports.addArticle = (req, res) => {
-  Articles.create({
-    title: req.body.title,
-    content: req.body.content,
-    category_id: req.body.category_id,
-    image: req.body.image,
+
+  var title = req.body.title;
+  var content = req.body.content;
+  var category_id = req.body.category_id;
+  var image = req.body.image;
+  var userId = req.body.userId;
+  var is_published = req.body.is_published;
+  var is_archived = req.body.is_archived;
+
+
+  var body = {
+    title: title,
+    content: content,
+    category_id: category_id,
+    // image: image,
     author_id: userId,
-    is_published: 1,
-    is_archived: 0
-  }).then(data =>
+    is_published: is_published,
+    is_archived: is_archived
+  };
+
+  Articles.create(body).then(data =>
     res.send({
-      message: "success add article",
+      success: true,
+      message: "berhasil menambah artikel",
       data
     })
   );
+
+  // if (req.method === 'POST') {
+  //   // Menangkap data gambar yang di-upload
+  //   let body = [];
+  //   req.on('data', (chunk) => {
+  //     body.push(chunk);
+  //   }).on('end', () => {
+  //     // Menggabungkan data yang di-upload
+  //     body = Buffer.concat(body).toString();
+  //     // Memecah data menjadi header dan payload
+  //     const boundary = body.split('\r\n')[0];
+  //     const payload = body.split(boundary).slice(2, -1)[0];
+  //     // Menentukan lokasi dan nama file untuk disimpan
+  //     const filepath = './images/image.jpg';
+  //     // Menyimpan file ke server
+  //     fs.writeFile(filepath, payload, { encoding: 'binary' }, (err) => {
+  //       if (err) throw err;
+  //       console.log('Gambar berhasil disimpan');
+  //       res.end();
+  //     });
+  //   });
+  // }
 };
 // DELETE article
 exports.deleteArticle = (req, res) => {

@@ -7,32 +7,36 @@ exports.login = (req, res) => {
   const password = req.body.password;
 
   if (password == "failed" || password == null || email == null) {
-    // console.log(kpassword);
     res.send({
       error: true,
-      message: "fill your email or your password before"
+      success: false,
+      message: "password tidak boleh kosong"
     });
-  } else if (email != null || password != null) {
+
+  } else if (email && password) {
     Users.findOne({
       where: { email, password }
     }).then(user => {
       if (user) {
         const token = jwt.sign({ id: user.id }, "amin");
         res.send({
+          success: true,
           user,
           token
         });
       } else {
         res.send({
           error: true,
-          message: "wrong email or password"
+          success: false,
+          message: "email atau password anda salah"
         });
       }
     });
   } else {
     res.send({
       error: true,
-      message: "fill your email or your password before"
+      success: false,
+      message: "mohon isi email dan password anda!"
     });
   }
 };

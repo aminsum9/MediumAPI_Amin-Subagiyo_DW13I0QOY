@@ -5,6 +5,7 @@ const Comment = require("./controller/Comment");
 const Follows = require("./controller/follow");
 const Auth = require("./controller/Auth");
 const cors = require("cors");
+const multer = require('multer');
 
 const { authenticated } = require("./middleware");
 
@@ -12,7 +13,7 @@ require("express-group-routes");
 
 const express = require("express");
 
-const bodyPanser = require("body-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -26,16 +27,23 @@ const corsOpts = {
     'POST',
   ],
 
-  allowedHeaders: [
-    'Content-Type',
-  ],
+  // allowedHeaders: [
+  //   'Content-Type',
+  // ],
 };
+
 
 app.use(cors(corsOpts));
 
-app.use(bodyPanser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listen to port ${port}`));
+
+app.get('/', (req, res) => {
+  return res.json({success: true, message: 'oke, berhasil!'});
+});
 
 app.group("/api/v1", router => {
   /* Task 1 */
@@ -58,7 +66,7 @@ app.group("/api/v1", router => {
 
   /* Task 4 */
   //ADD article
-  router.post("/article", authenticated, Articles.addArticle);
+  router.post("/article", authenticated, multer().none(), Articles.addArticle);
   //DELETE article
   router.delete("/article/:id", authenticated, Articles.deleteArticle);
   //UPDATE article -- update pakai patch atau put

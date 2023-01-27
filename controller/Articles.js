@@ -93,11 +93,13 @@ exports.addArticle = (req, res) => {
   // if (!fs.existsSync(dir)){
   //     fs.mkdirSync(dir);
   // }
-  var pathName = "";
+  var imageSavedName = "";
+
   if(req.files){
     const imageName = req.files[0].originalname;
     const imageBuffer = req.files[0].buffer;
-    pathName = `./images/${imageName}-${moment().format('YYYY-MM-DD-HH:mm:ss')}.jpg`;
+    imageSavedName = `${imageName}-${moment().format('YYYY-MM-DD-HH:mm:ss')}.jpg`;
+    const pathName = `./images/${imageSavedName}`;
 
     fs.writeFile(pathName, imageBuffer, 'binary', (error) => {
         if (error) {
@@ -112,7 +114,7 @@ exports.addArticle = (req, res) => {
     title: title,
     content: content,
     // category_id: category_id || 0,
-    image: pathName,
+    image: imageSavedName,
     // author_id: userId || 0,
     is_published: is_published || 0,
     is_archived: is_archived || 0

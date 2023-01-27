@@ -6,6 +6,7 @@ const Follows = require("./controller/follow");
 const Auth = require("./controller/Auth");
 const cors = require("cors");
 const multer = require('multer');
+const path = require('path');
 
 const { authenticated } = require("./middleware");
 
@@ -32,6 +33,7 @@ const corsOpts = {
   // ],
 };
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(cors(corsOpts));
 
@@ -44,6 +46,16 @@ app.listen(port, () => console.log(`Listen to port ${port}`));
 app.get('/', (req, res) => {
   return res.json({success: true, message: 'oke, berhasil!'});
 });
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage });
 
 app.group("/api/v1", router => {
   /* Task 1 */
@@ -66,7 +78,7 @@ app.group("/api/v1", router => {
 
   /* Task 4 */
   //ADD article
-  router.post("/article", authenticated, multer().none(), Articles.addArticle);
+  router.post("/article", authenticated, multer().any(), Articles.addArticle);
   //DELETE article
   router.delete("/article/:id", authenticated, Articles.deleteArticle);
   //UPDATE article -- update pakai patch atau put

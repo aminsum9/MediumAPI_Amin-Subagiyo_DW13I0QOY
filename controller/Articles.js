@@ -2,6 +2,8 @@ const Categories = require("../models").categories;
 const Articles = require("../models").articles;
 const Comments = require("../models").comment;
 const Users = require("../models").users;
+const { time } = require("console");
+const moment = require('moment');
 const fs = require('fs');
 
 /* Task 2 */
@@ -82,21 +84,40 @@ exports.addArticle = (req, res) => {
   var title = req.body.title;
   var content = req.body.content;
   var category_id = req.body.category_id;
-  var image = req.body.image;
+  var image = req.files.image;
   var userId = req.body.userId;
   var is_published = req.body.is_published;
   var is_archived = req.body.is_archived;
 
+  // const dir = './images';
+  // if (!fs.existsSync(dir)){
+  //     fs.mkdirSync(dir);
+  // }
+  var pathName = "";
+  if(req.files){
+    const imageName = req.files[0].originalname;
+    const imageBuffer = req.files[0].buffer;
+    pathName = `./images/${imageName}-${moment().format('YYYY-MM-DD-HH:mm:ss')}.jpg`;
+
+    fs.writeFile(pathName, imageBuffer, 'binary', (error) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Image saved successfully!');
+        }
+    });
+  }
 
   var body = {
     title: title,
     content: content,
-    category_id: category_id,
-    // image: image,
-    author_id: userId,
-    is_published: is_published,
-    is_archived: is_archived
+    // category_id: category_id || 0,
+    image: pathName,
+    // author_id: userId || 0,
+    is_published: is_published || 0,
+    is_archived: is_archived || 0
   };
+
 
   Articles.create(body).then(data =>
     res.send({
@@ -106,27 +127,6 @@ exports.addArticle = (req, res) => {
     })
   );
 
-  // if (req.method === 'POST') {
-  //   // Menangkap data gambar yang di-upload
-  //   let body = [];
-  //   req.on('data', (chunk) => {
-  //     body.push(chunk);
-  //   }).on('end', () => {
-  //     // Menggabungkan data yang di-upload
-  //     body = Buffer.concat(body).toString();
-  //     // Memecah data menjadi header dan payload
-  //     const boundary = body.split('\r\n')[0];
-  //     const payload = body.split(boundary).slice(2, -1)[0];
-  //     // Menentukan lokasi dan nama file untuk disimpan
-  //     const filepath = './images/image.jpg';
-  //     // Menyimpan file ke server
-  //     fs.writeFile(filepath, payload, { encoding: 'binary' }, (err) => {
-  //       if (err) throw err;
-  //       console.log('Gambar berhasil disimpan');
-  //       res.end();
-  //     });
-  //   });
-  // }
 };
 // DELETE article
 exports.deleteArticle = (req, res) => {

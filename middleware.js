@@ -7,9 +7,8 @@ exports.authenticated = (req, res, next) => {
     console.log("need header");
   }
   let token = authHeader.split("Bearer ")[1];
-  console.log(authHeader);
-
-  jwt.verify(token, "amin", (err, decoded) => {
+  // console.log( process.env.JWT_TOKEN, ' ----- process.env.JWT_TOKEN')
+  jwt.verify(token, 'amin', (err, decoded) => {
     if (err) {
       return res.status(403).send({ message: "Your Token is Longer Valid" });
     }
@@ -18,16 +17,3 @@ exports.authenticated = (req, res, next) => {
     next();
   });
 };
-
-// exports.auth = jwt({
-//   secret: "amin"
-// });
-
-// exports.authorized = (req, res, next) => {
-//   if (req.user.id != req.params.createdBy) {
-//     return res.status(401).json({ message: "You are not authenticated." });
-//   }
-//   next();
-// };
-
-// exports.authenticated = jwt({ secret: "amin" });

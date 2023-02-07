@@ -391,7 +391,7 @@ express-unless@^0.3.0:
   resolved "https://registry.yarnpkg.com/express-unless/-/express-unless-0.3.1.tgz#2557c146e75beb903e2d247f9b5ba01452696e20"
   integrity sha512-MPF0KbUOTUMvTQ8/1+bewiYGdCbSL4FvkuVNe2ydjZ0HE/Uq2+NPfKLb1vA5DbcvVPrrAg6GB0ULURUALzzgqw==
 
-express@^4.13.4, express@^4.17.1:
+express@^4.13.4, express@^4.18.2:
   version "4.18.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.18.2.tgz#3fabe08296e930c796c19e3c516979386ba9fd59"
   integrity sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==

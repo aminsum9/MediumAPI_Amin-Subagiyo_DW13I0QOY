@@ -7,8 +7,8 @@ exports.authenticated = (req, res, next) => {
     console.log("need header");
   }
   let token = authHeader.split("Bearer ")[1];
-  // console.log( process.env.JWT_TOKEN, ' ----- process.env.JWT_TOKEN')
-  jwt.verify(token, 'amin', (err, decoded) => {
+  console.log( process.env.JWT_TOKEN, ' ----- process.env.JWT_TOKEN')
+  jwt.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
     if (err) {
       return res.status(403).send({ message: "Your Token is Longer Valid" });
     }

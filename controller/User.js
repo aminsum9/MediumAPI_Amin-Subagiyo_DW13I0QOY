@@ -1,5 +1,6 @@
 const Users = require("../models").users;
 const Follows = require("../models").follow;
+require('dotenv').config();
 
 /* Task 10 */
 // exports.login = (req, res) => {
@@ -22,6 +23,7 @@ exports.register = (req, res) => {
       message: "your password must be create at least 8 characters!"
     });
   } else {
+    const token = jwt.sign({ id: user.id }, process.env.JWT_TOKEN);
     Users.create(req.body).then(data => {
       res.send({
         message: "success",

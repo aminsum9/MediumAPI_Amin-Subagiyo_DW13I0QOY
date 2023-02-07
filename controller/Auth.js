@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
+require('dotenv').config();
+
 const Users = models.users;
 
 exports.login = (req, res) => {
@@ -18,7 +20,7 @@ exports.login = (req, res) => {
       where: { email, password }
     }).then(user => {
       if (user) {
-        const token = jwt.sign({ id: user.id }, "amin");
+        const token = jwt.sign({ id: user.id }, process.env.JWT_TOKEN);
         res.send({
           success: true,
           user,
